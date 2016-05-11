@@ -40,15 +40,15 @@
   
   
   
-  <p>The main entry point into the App Cache Behavior library.
-It is meant to be called by a service worker's fetch event handler:</p>
+  <p>The main entry point into the library.
+It is meant to be called by a service worker's <code>fetch</code> event handler:</p>
 <pre><code>self.addEventListener('fetch', event => {
   event.respondWith(legacyAppCacheBehavior(event).catch(error => {
     // Fallback behavior goes here, e.g. return fetch(event.request);
   }));
 });
 </code></pre>
-<p>legacyAppCacheBehavior() can be selectively applied to only a subset of
+<p><code>legacyAppCacheBehavior()</code> can be selectively applied to only a subset of
 requests, to aid in the migration off of App Cache and onto a more robust
 service worker implementation:</p>
 <pre><code>self.addEventListener('fetch', event => {
