@@ -787,8 +787,8 @@
    * ```js
    * // Import the library into the service worker global scope:
    * // https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts
-   * 
    * importScripts('path/to/appcache-behavior-import.js');
+   * 
    * self.addEventListener('fetch', event => {
    *   if (event.request.url.match(/legacyRegex/)) {
    *     event.respondWith(goog.legacyAppCacheBehavior(event));
