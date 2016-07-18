@@ -1,6 +1,6 @@
 # sw-offline-google-analytics
 
-A library to extend a service worker&#x27;s behavior, allowing it to retry failed Google Analytics requests.
+A service worker helper library to retry offline Google Analytics requests when a connection is available.
 
 ## Installation
 `npm install --save-dev sw-offline-google-analytics`
