@@ -15,7 +15,7 @@ Browse sample source code in the [demo directory](https://github.com/GoogleChrom
 
 ### goog.legacyAppCacheBehavior
 
-[projects/sw-appcache-behavior/src/appcache-behavior-import.js:501-514](https://github.com/GoogleChrome/sw-helpers/blob/f2d1b9af36cfc912af7f40cef607f0ed10cb827e/projects/sw-appcache-behavior/src/appcache-behavior-import.js#L501-L514 "Source code on GitHub")
+[projects/sw-appcache-behavior/src/appcache-behavior-import.js:501-514](https://github.com/GoogleChrome/sw-helpers/blob/0c15c2fde8a3f835d03d47af2075e5171af11f39/projects/sw-appcache-behavior/src/appcache-behavior-import.js#L501-L514 "Source code on GitHub")
 
 `goog.legacyAppCacheBehavior` is the main entry point to the library
 from within service worker code.
@@ -75,4 +75,4 @@ self.addEventListener('fetch', event => {
 
 -   `event` **FetchEvent** 
 
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).&lt;[Response](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)>** 
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Response](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)>** 

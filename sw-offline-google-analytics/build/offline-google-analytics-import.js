@@ -100,9 +100,9 @@ IDBHelper.prototype.delete = function(key) {
  */
 IDBHelper.prototype.get = function(key) {
   return this._getDb().then(db => {
-    const tx = db.transaction(this._storeName);
-    const objectStore = tx.objectStore(this._storeName);
-    return objectStore.get(key);
+    return db.transaction(this._storeName)
+      .objectStore(this._storeName)
+      .get(key);
   });
 };
 
@@ -116,9 +116,9 @@ IDBHelper.prototype.get = function(key) {
  */
 IDBHelper.prototype.getAllValues = function() {
   return this._getDb().then(db => {
-    const tx = db.transaction(this._storeName);
-    const objectStore = tx.objectStore(this._storeName);
-    return objectStore.getAll();
+    return db.transaction(this._storeName)
+      .objectStore(this._storeName)
+      .getAll();
   });
 };
 
@@ -133,9 +133,9 @@ IDBHelper.prototype.getAllValues = function() {
  */
 IDBHelper.prototype.getAllKeys = function() {
   return this._getDb().then(db => {
-    const tx = db.transaction(this._storeName);
-    const objectStore = tx.objectStore(this._storeName);
-    return objectStore.getAllKeys();
+    return db.transaction(this._storeName)
+      .objectStore(this._storeName)
+      .getAllKeys();
   });
 };
 
@@ -545,6 +545,7 @@ const constants = require('./constants.js');
 
 const idbHelper = new IDBHelper(constants.IDB.NAME, constants.IDB.VERSION,
   constants.IDB.STORE);
+self.a = idbHelper;
 
 /**
  * Adds a URL to IndexedDB, along with the current timestamp.
@@ -552,11 +553,14 @@ const idbHelper = new IDBHelper(constants.IDB.NAME, constants.IDB.VERSION,
  * If the request has a body, that body will be used as the URL's search
  * parameters when saving the URL to IndexedDB.
  *
+ * If no `time` parameter is provided, Date.now() will be used.
+ *
  * @private
  * @param {Request} request
+*  @param {Number} [time]
  * @returns {Promise.<T>} A promise that resolves when IndexedDB is updated.
  */
-module.exports = request => {
+module.exports = (request, time) => {
   const url = new URL(request.url);
   return request.text().then(body => {
     // If there's a request body, then use it as the URL's search value.
@@ -566,7 +570,7 @@ module.exports = request => {
       url.search = body;
     }
 
-    return idbHelper.put(url.toString(), Date.now());
+    return idbHelper.put(url.toString(), time || Date.now());
   });
 };
 
