@@ -592,6 +592,7 @@ module.exports = (request, time) => {
 
 const IDBHelper = require('../../../../lib/idb-helper.js');
 const constants = require('./constants.js');
+const log = require('../../../../lib/log.js');
 
 const idbHelper = new IDBHelper(constants.IDB.NAME, constants.IDB.VERSION,
   constants.IDB.STORE);
@@ -603,14 +604,38 @@ const idbHelper = new IDBHelper(constants.IDB.NAME, constants.IDB.VERSION,
  * Returns a promise that resolves when the replaying is complete.
  *
  * @private
+ * @param {Object=} additionalParameters URL parameters, expressed as key/value
+ *                 pairs, to be added to replayed Google Analytics requests.
+ *                 This can be used to, e.g., set a custom dimension indicating
+ *                 that the request was replayed from the service worker.
  * @returns {Promise.<T>}
  */
-module.exports = () => {
+module.exports = additionalParameters => {
+  additionalParameters = additionalParameters || {};
+
   return idbHelper.getAllKeys().then(urls => {
     return Promise.all(urls.map(url => {
       return idbHelper.get(url).then(queuedTime => {
         const newUrl = new URL(url);
-        newUrl.search += (newUrl.search ? '&' : '') + 'qt=' + queuedTime;
+
+        // URLSearchParams was added in Chrome 49.
+        // On the off chance we're on a browser that lacks support, we won't
+        // set additionParameters, but at least we'll set qt=.
+        if ('searchParams' in newUrl) {
+          additionalParameters.qt = queuedTime;
+          // Call sort() on the keys so that there's a reliable order of calls
+          // to searchParams.set(). This isn't important in terms of
+          // functionality, but it will make testing easier, since the
+          // URL serialization depends on the order in which .set() is called.
+          Object.keys(additionalParameters).sort().forEach(parameter => {
+            newUrl.searchParams.set(parameter, additionalParameters[parameter]);
+          });
+        } else {
+          log('The browser does not support URLSearchParams, ' +
+            'so not setting additional parameters.');
+          newUrl.search += (newUrl.search ? '&' : '') + 'qt=' + queuedTime;
+        }
+
         return fetch(newUrl.toString()).catch(error => {
           // If this was queued recently, then rethrow the error, to prevent
           // the entry from being deleted. It will be retried again later.
@@ -623,7 +648,7 @@ module.exports = () => {
   });
 };
 
-},{"../../../../lib/idb-helper.js":1,"./constants.js":5}],8:[function(require,module,exports){
+},{"../../../../lib/idb-helper.js":1,"../../../../lib/log.js":2,"./constants.js":5}],8:[function(require,module,exports){
 /*
  Copyright 2016 Google Inc. All Rights Reserved.
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -646,7 +671,7 @@ const replayQueuedRequests = require('./lib/replay-queued-requests.js');
 const scope = require('../../../lib/scope.js');
 
 /**
- * In order to use the library, call`goog.useOfflineGoogleAnalytics()`.
+ * In order to use the library, call`goog.offlineGoogleAnalytics.initialize()`.
  * It will take care of setting up service worker `fetch` handlers to ensure
  * that the Google Analytics JavaScript is available offline, and that any
  * Google Analytics requests made while offline are saved (using `IndexedDB`)
@@ -659,16 +684,30 @@ const scope = require('../../../lib/scope.js');
  * // First, import the library into the service worker global scope:
  * importScripts('path/to/offline-google-analytics-import.js');
  *
- * // Then, call goog.useOfflineGoogleAnalytics() to activate the library.:
- * goog.useOfflineGoogleAnalytics();
+ * // Then, call goog.offlineGoogleAnalytics.initialize():
+ * goog.offlineGoogleAnalytics.initialize({
+ *   parameterOverrides: {
+ *     // Optionally, pass in an Object with additional parameters that will be
+ *     // included in each replayed request.
+ *     dimension1: 'Some Value',
+ *     dimension2: 'Some Other Value'
+ *   }
+ * });
  *
  * // At this point, implement any other service worker caching strategies
  * // appropriate for your web app.
  *
- * @alias goog.useOfflineGoogleAnalytics
+ * @alias goog.offlineGoogleAnalytics.initialize
+ * @param {Object=} config Optional configuration arguments.
+ * @param {Object=} config.parameterOverrides Optional URL parameters, expressed
+ *                  as key/value pairs, to be added to replayed Google Analytics
+ *                  requests. This can be used to, e.g., set a custom dimension
+ *                  indicating that the request was replayed.
  * @returns {undefined}
  */
-const useOfflineGoogleAnalytics = () => {
+const initialize = config => {
+  config = config || {};
+
   self.addEventListener('fetch', event => {
     const url = new URL(event.request.url);
     const request = event.request;
@@ -705,11 +744,13 @@ const useOfflineGoogleAnalytics = () => {
     }
   });
 
-  replayQueuedRequests();
+  replayQueuedRequests(config.parameterOverrides || {});
 };
 
 // Add the function to the global service worker scope,
-// as goog.useOfflineGoogleAnalytics.
-scope('useOfflineGoogleAnalytics', useOfflineGoogleAnalytics);
+// as goog.offlineGoogleAnalytics.initialize.
+scope('offlineGoogleAnalytics', {
+  initialize: initialize
+});
 
 },{"../../../lib/log.js":2,"../../../lib/scope.js":3,"./lib/constants.js":5,"./lib/enqueue-request.js":6,"./lib/replay-queued-requests.js":7}]},{},[8]);
