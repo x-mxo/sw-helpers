@@ -1,0 +1,78 @@
+---
+layout: jsdoc
+title: "Source: sw-routing/src/lib/route.js"
+jsdocNav: 
+  - Modules:
+    - <a href="module-sw-background-sync-queue.html#main">sw-background-sync-queue</a>
+    - <a href="module-sw-broadcast-cache-update.html#main">sw-broadcast-cache-update</a>
+    - <a href="module-sw-cache-expiration.html#main">sw-cache-expiration</a>
+    - <a href="module-sw-cacheable-response-behavior.html#main">sw-cacheable-response-behavior</a>
+    - <a href="module-sw-lib.html#main">sw-lib</a>
+    - <a href="module-sw-precaching.html#main">sw-precaching</a>
+    - <a href="module-sw-routing.html#main">sw-routing</a>
+    - <a href="module-sw-runtime-caching.html#main">sw-runtime-caching</a>
+---
+
+
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ Copyright 2016 Google Inc. All Rights Reserved.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
+
+import assert from '../../../../lib/assert';
+import {defaultMethod, validMethods} from './constants';
+
+/**
+ * @memberof module:sw-routing
+ */
+class Route {
+  /**
+   * The constructor for Route expects an object with `match` and `handler`
+   * properties which should both be functions.
+   *
+   * @param {function} match - The function that determines whether the
+   *        route matches.
+   * @param {Object} handler - An Object with a `handle` method. That method
+   *        will be used to respond to matching requests.
+   * @param {string} [method] Only match requests that use this
+   *        HTTP method. Defaults to `'GET'` if not specified.
+   */
+  constructor({match, handler, method} = {}) {
+    assert.isType({match}, 'function');
+    assert.hasMethod({handler}, 'handle');
+
+    this.match = match;
+    this.handler = handler;
+    if (method) {
+      assert.isOneOf({method}, validMethods);
+      this.method = method;
+    } else {
+      this.method = defaultMethod;
+    }
+  }
+}
+
+export default Route;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
