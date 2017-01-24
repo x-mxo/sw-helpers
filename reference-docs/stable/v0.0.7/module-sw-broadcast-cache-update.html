@@ -27,7 +27,15 @@ jsdocNav:
 
     
         
-            <div class="description"><p>sw-broadcast-cache-update Module</p></div>
+            <div class="description"><p>A helper library that uses the Broadcast Channel API to announce when
+two Response objects differ.</p>
+<p>The main use of this module will be instantiating a new <code>Behavior</code> and
+passing it to a
+<a href="module-sw-runtime-caching.RequestWrapper.html#main">RequestWrapper</a>,
+as shown in the first example below.</p>
+<p>You can listen for updates from you web app by adding an event listener on
+a browser channel with the same channel name as the Behavior,
+which 'cache-updates' in the second example below.</p></div>
         
 
         
@@ -40,6 +48,35 @@ jsdocNav:
 <div class="collapse-details js-collapse-details">
 
 
+
+
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Using the broadcastCacheUpdate.Behavior class in a
+service worker.</p>
+    
+    <pre class="prettyprint"><code>const requestWrapper = new goog.runtimeCaching.RequestWrapper({
+  cacheName: 'text-files',
+  behaviors: [
+    new goog.broadcastCacheUpdate.Behavior({channelName: 'cache-updates'}),
+  ],
+});
+
+const route = new goog.routing.RegExpRoute({
+  regExp: /\.txt$/,
+  handler: new goog.runtimeCaching.StaleWhileRevalidate({requestWrapper}),
+});
+
+const router = new goog.routing.Router();
+router.registerRoute({route});</code></pre>
+
+        <p class="code-caption">Listening for the broadcast message in the
+window.</p>
+    
+    <pre class="prettyprint"><code>const updateChannel = new BroadcastChannel('cache-updates');
+updateChannel.addEventListener('message', event => {
+  console.log(`Cache updated: ${event.data.payload.updatedUrl}`);
+});</code></pre>
 
 
 
@@ -136,13 +173,13 @@ jsdocNav:
     
 
     
-        <h2 class="subsection-title">Members</h2>
+        <h2 class="subsection-title">Member Variables</h2>
 
         <div class="subsection-members">
         
             
 <div class="collapsing-entry member-type-member">
-<h4 class="js-collapse-title" id=".cacheUpdatedMessageType"><span class="type-signature">(static, constant) </span>cacheUpdatedMessageType<span class="type-signature"> :string</span></h4>
+<h4 class="js-collapse-title" id=".cacheUpdatedMessageType"><span class="type-attribs">(static, constant) </span>cacheUpdatedMessageType <span class="return-arrow">&rarr;</span> <span class="type-signature">string</span></h4>
 
 <div class="collapse-details js-collapse-details">
 
@@ -152,18 +189,6 @@ jsdocNav:
 <div class="description">
     <p>The value <code>'CACHE_UPDATED'</code>, used as the <code>type</code> field of the update message.</p>
 </div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">string</span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -206,6 +231,12 @@ jsdocNav:
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Prints 'CACHE_UPDATED'
+console.log(goog.broadcastCacheUpdate.cacheUpdatedMessageType);</code></pre>
+
+
 
 </div>
 </div>
@@ -224,7 +255,7 @@ jsdocNav:
 <div class="collapsing-entry method-type-function ">
 
 
-    <h4 class="js-collapse-title" id=".broadcastUpdate"><span class="type-signature">(static) </span><span class="this">this.</span>broadcastUpdate<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="js-collapse-title" id=".broadcastUpdate"><span class="type-attribs">(static) </span><span class="this">this.</span>broadcastUpdate<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"></span></h4>
 
 
 <div class="collapse-details js-collapse-details">
@@ -233,16 +264,15 @@ jsdocNav:
   
 
   <div class="description">
-    <p>Uses the <a href="https://developers.google.com/web/updates/2016/09/broadcastchannel">Broadcast Channel API</a>
-to notify interested subscribers about a change to a cached resource.</p>
-<p>You would not normally call this method directly; it's called automatically
+    <p>You would not normally call this method directly; it's called automatically
 by an instance of the Behavior class. It's exposed here for the
 benefit of developers who would rather not use the full <code>Behavior</code>
 implementation.</p>
-<p>The message that's posted takes the following format, inspired by the
+<p>Calling this will dispatch a message on the provided <a href="https://developers.google.com/web/updates/2016/09/broadcastchannel">Broadcast Channel</a>
+to notifiy interested subscribed about a change to a cached resource.</p>
+<p>The message that's posted has a formation inspired by the
 <a href="https://github.com/acdlite/flux-standard-action#introduction">Flux standard action</a>
-format. (Usage of <a href="https://facebook.github.io/flux/">Flux</a> itself is not at
-all required.)</p>
+format like so:</p>
 <pre class="prettyprint source"><code>{
   type: 'CACHE_UPDATED',
   meta: 'sw-broadcast-cache-update',
@@ -250,9 +280,20 @@ all required.)</p>
     cacheName: 'the-cache-name',
     updatedUrl: 'https://example.com/'
   }
-}</code></pre>
+}</code></pre><p>(Usage of <a href="https://facebook.github.io/flux/">Flux</a> itself is not at
+all required.)</p>
   </div>
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>goog.broadcastCacheUpdate.broadcastUpdate({
+  channel: new BroadcastChannel('Channel Name'),
+  cacheName: 'example-cache-name',
+  url: '/',
+  source: 'custom-library'
+});</code></pre>
 
 
 
@@ -511,7 +552,7 @@ all required.)</p>
 <div class="collapsing-entry method-type-function ">
 
 
-    <h4 class="js-collapse-title" id=".responsesAreSame"><span class="type-signature">(static) </span><span class="this">this.</span>responsesAreSame<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"> <span class="return-arrow">&rarr;</span> boolean</span></h4>
+    <h4 class="js-collapse-title" id=".responsesAreSame"><span class="type-attribs">(static) </span><span class="this">this.</span>responsesAreSame<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"> <span class="return-arrow">&rarr;</span> boolean</span></h4>
 
 
 <div class="collapse-details js-collapse-details">
@@ -524,6 +565,19 @@ all required.)</p>
 the same or not.</p>
   </div>
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const responseIsSame = responsesAreSame({
+  first: firstResponse,
+  second: secondResponse,
+  headersToCheck: [
+    'content-length',
+    'etag',
+    'last-modified',
+  ]
+});</code></pre>
 
 
 
