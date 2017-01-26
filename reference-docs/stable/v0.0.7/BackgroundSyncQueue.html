@@ -26,6 +26,26 @@ jsdocNav:
 
     
       
+          <h3>Example</h3>
+          
+    <pre class="prettyprint"><code>// Case 1: When you want to push the requests manually
+let bgQueue = new goog.backgroundSyncQueue.BackgroundSyncQueue();
+self.addEventListener('fetch', function(e) {
+		if (e.request.url.startsWith('https://jsonplaceholder.typicode.com')) {
+			const clone = e.request.clone();
+			e.respondWith(fetch(e.request).catch((err)=>{
+				bgQueue.pushIntoQueue({
+					request: clone,
+				});
+				throw err;
+			}));
+	 	}
+});
+// Case 2: When you want the higher level framework to take care of failed
+requests
+// TODO: add example here</code></pre>
+
+      
 
       
         <h2 class="subsection-title">Constructor</h2>
@@ -36,7 +56,7 @@ jsdocNav:
 <div class="collapsing-entry method-type-class start-open">
 
 
-    <h4 class="js-collapse-title" id="BackgroundSyncQueue">new BackgroundSyncQueue<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="js-collapse-title" id="BackgroundSyncQueue">new BackgroundSyncQueue<span class="signature">(<span class="signature-args"></span>)</span><span class="type-signature"></span></h4>
 
 
 <div class="collapse-details js-collapse-details">
@@ -45,7 +65,7 @@ jsdocNav:
   
 
   <div class="description">
-    <p>Creates an instance of BackgroundSyncQueue with the given options</p>
+    <p>Use the instance of this class to push the failed requests into the queue.</p>
   </div>
 
 
@@ -59,250 +79,6 @@ jsdocNav:
 
   
 
-
-  <tr>
-    <th>Parameters</th>
-    <td>
-      
-
-<table class="params">
-    
-
-        <tr>
-            
-              <td class="name">input</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-
-            
-                
-                
-
-                
-
-                
-                
-                  <span class="param-attributes">(Optional)</span>
-                  
-            
-            </td>
-
-            
-              <td></td>
-            
-
-            <tr>
-              <td></td>
-              <td class="description last">
-                
-                
-                  <h6>Properties</h6>
-                  
-
-<table class="params">
-    
-
-        <tr>
-            
-              <td class="name">maxRetentionTime</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-
-            
-
-            
-                
-                
-
-                
-
-                
-                
-                  <span class="param-attributes">(Optional)</span>
-                  
-            
-            </td>
-
-            
-                <td class="default">
-                
-                    5 days
-                
-                </td>
-            
-
-            <tr>
-              <td></td>
-              <td class="description last">
-                <p>Time for which a queued
-request will live in the queue(irespective of failed/success of replay)</p>
-                
-              </td>
-            </tr>
-        </tr>
-
-    
-
-        <tr>
-            
-              <td class="name">callbacks</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-
-            
-                
-                
-
-                
-
-                
-                
-                  <span class="param-attributes">(Optional)</span>
-                  
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <tr>
-              <td></td>
-              <td class="description last">
-                <p>Callbacks for successfull/ failed
-replay of a request</p>
-                
-              </td>
-            </tr>
-        </tr>
-
-    
-
-        <tr>
-            
-              <td class="name">queueName</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-
-            
-                
-                
-
-                
-
-                
-                
-                  <span class="param-attributes">(Optional)</span>
-                  
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <tr>
-              <td></td>
-              <td class="description last">
-                <p>Queue name inside db in which
-requests will be queued</p>
-                
-              </td>
-            </tr>
-        </tr>
-
-    
-
-        <tr>
-            
-              <td class="name">broadcastChannel</td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">BroadcastChannel</span>
-
-
-
-            
-
-            
-                
-                
-
-                
-
-                
-                
-                  <span class="param-attributes">(Optional)</span>
-                  
-            
-            </td>
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <tr>
-              <td></td>
-              <td class="description last">
-                <p>BroadcastChannel
-which will be used to publish messages when the request will be queued.</p>
-                
-              </td>
-            </tr>
-        </tr>
-
-    
-</table>
-
-                
-              </td>
-            </tr>
-        </tr>
-
-    
-</table>
-
-    </td>
-  </tr>
 
 
 <!--
@@ -612,26 +388,6 @@ the queue</p>
 
     
       
-          <h3>Example</h3>
-          
-    <pre class="prettyprint"><code>// Case 1: When you want to push the requests manually
-let bgQueue = new goog.backgroundSyncQueue.BackgroundSyncQueue();
-self.addEventListener('fetch', function(e) {
-		if (e.request.url.startsWith('https://jsonplaceholder.typicode.com')) {
-			const clone = e.request.clone();
-			e.respondWith(fetch(e.request).catch((err)=>{
-				bgQueue.pushIntoQueue({
-					request: clone,
-				});
-				throw err;
-			}));
-	 	}
-});
-// Case 2: When you want the higher level framework to take care of failed
-requests
-// TODO: add example here</code></pre>
-
-      
 
       
         <h2 class="subsection-title">Constructor</h2>
@@ -642,7 +398,7 @@ requests
 <div class="collapsing-entry method-type-class start-open">
 
 
-    <h4 class="js-collapse-title" id="BackgroundSyncQueue">new BackgroundSyncQueue<span class="signature">(<span class="signature-args"></span>)</span><span class="type-signature"></span></h4>
+    <h4 class="js-collapse-title" id="BackgroundSyncQueue">new BackgroundSyncQueue<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"></span></h4>
 
 
 <div class="collapse-details js-collapse-details">
@@ -651,7 +407,7 @@ requests
   
 
   <div class="description">
-    <p>Use the instance of this class to push the failed requests into the queue.</p>
+    <p>Creates an instance of BackgroundSyncQueue with the given options</p>
   </div>
 
 
@@ -665,6 +421,250 @@ requests
 
   
 
+
+  <tr>
+    <th>Parameters</th>
+    <td>
+      
+
+<table class="params">
+    
+
+        <tr>
+            
+              <td class="name">input</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+
+            
+                
+                
+
+                
+
+                
+                
+                  <span class="param-attributes">(Optional)</span>
+                  
+            
+            </td>
+
+            
+              <td></td>
+            
+
+            <tr>
+              <td></td>
+              <td class="description last">
+                
+                
+                  <h6>Properties</h6>
+                  
+
+<table class="params">
+    
+
+        <tr>
+            
+              <td class="name">maxRetentionTime</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+
+            
+
+            
+                
+                
+
+                
+
+                
+                
+                  <span class="param-attributes">(Optional)</span>
+                  
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    5 days
+                
+                </td>
+            
+
+            <tr>
+              <td></td>
+              <td class="description last">
+                <p>Time for which a queued
+request will live in the queue(irespective of failed/success of replay)</p>
+                
+              </td>
+            </tr>
+        </tr>
+
+    
+
+        <tr>
+            
+              <td class="name">callbacks</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+
+            
+                
+                
+
+                
+
+                
+                
+                  <span class="param-attributes">(Optional)</span>
+                  
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <tr>
+              <td></td>
+              <td class="description last">
+                <p>Callbacks for successfull/ failed
+replay of a request</p>
+                
+              </td>
+            </tr>
+        </tr>
+
+    
+
+        <tr>
+            
+              <td class="name">queueName</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+
+            
+                
+                
+
+                
+
+                
+                
+                  <span class="param-attributes">(Optional)</span>
+                  
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <tr>
+              <td></td>
+              <td class="description last">
+                <p>Queue name inside db in which
+requests will be queued</p>
+                
+              </td>
+            </tr>
+        </tr>
+
+    
+
+        <tr>
+            
+              <td class="name">broadcastChannel</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">BroadcastChannel</span>
+
+
+
+            
+
+            
+                
+                
+
+                
+
+                
+                
+                  <span class="param-attributes">(Optional)</span>
+                  
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <tr>
+              <td></td>
+              <td class="description last">
+                <p>BroadcastChannel
+which will be used to publish messages when the request will be queued.</p>
+                
+              </td>
+            </tr>
+        </tr>
+
+    
+</table>
+
+                
+              </td>
+            </tr>
+        </tr>
+
+    
+</table>
+
+    </td>
+  </tr>
 
 
 <!--
