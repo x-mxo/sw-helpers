@@ -22,33 +22,19 @@ jsdocNav:
     
         <h2>Behavior</h2>
         
+            <p>The cache expiration behavior allows you define an expiration and / or
+limit on the responses cached.</p>
+        
     
 
     
       
-          <h3>Examples</h3>
+          <h3>Example</h3>
           
-    <pre class="prettyprint"><code>// Used as an automatically invoked as "behavior" by a RequestWrapper:
-
-const requestWrapper = new goog.runtimeCaching.RequestWrapper({
-  cacheName: 'runtime-cache',
-  behaviors: [
-    new goog.cacheExpiration.Behavior({maxEntries: 10})
-  ]
-});
-
-// Set up a route to match any requests made against the example.com domain.
-// The requests will be handled with a stale-while-revalidate policy, and the
-// cache size will be capped at 10 entries.
-const route = new goog.routing.RegExpRoute({
-  match: ({url}) => url.domain === 'example.com',
-  handler: new goog.runtimeCaching.StaleWhileRevalidate({requestWrapper})
+    <pre class="prettyprint"><code>const expirationBehavior = new goog.cacheExpiration.Behavior({
+  maxEntries: 2,
+  maxAgeSeconds: 10,
 });</code></pre>
-
-    <pre class="prettyprint"><code>// Explicitly invoked usage independent of the goog.routing framework, via
-// the expireOldEntries() method:
-
-// TODO: Write sample code.</code></pre>
 
       
 
@@ -106,6 +92,7 @@ certain criteria—maximum number of entries, age of entry, or both—is met.</p
 <span class="param-type">Object</span>
 
 
+
             
 
             
@@ -118,7 +105,7 @@ certain criteria—maximum number of entries, age of entry, or both—is met.</p
             <tr>
               <td></td>
               <td class="description last">
-                <p>The input object to this function.</p>
+                
                 
                   <h6>Properties</h6>
                   
@@ -135,6 +122,7 @@ certain criteria—maximum number of entries, age of entry, or both—is met.</p
             
                 
 <span class="param-type">Number</span>
+
 
 
             
@@ -177,6 +165,7 @@ certain criteria—maximum number of entries, age of entry, or both—is met.</p
             
                 
 <span class="param-type">Number</span>
+
 
 
             
@@ -228,8 +217,9 @@ certain criteria—maximum number of entries, age of entry, or both—is met.</p
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 
@@ -324,6 +314,13 @@ of entries, depending on how this instance is configured.</p>
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>expirationBehavior.expireEntries({
+  cacheName: 'example-cache-name'
+});</code></pre>
+
+
 
 <table class="method-info-table">
 
@@ -353,6 +350,7 @@ of entries, depending on how this instance is configured.</p>
 <span class="param-type">Object</span>
 
 
+
             
 
             
@@ -365,7 +363,7 @@ of entries, depending on how this instance is configured.</p>
             <tr>
               <td></td>
               <td class="description last">
-                <p>The input object to this function.</p>
+                
                 
                   <h6>Properties</h6>
                   
@@ -382,6 +380,7 @@ of entries, depending on how this instance is configured.</p>
             
                 
 <span class="param-type">string</span>
+
 
 
             
@@ -421,6 +420,7 @@ of entries, depending on how this instance is configured.</p>
             
                 
 <span class="param-type">Number</span>
+
 
 
             
@@ -472,8 +472,9 @@ of entries, depending on how this instance is configured.</p>
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 
@@ -534,8 +535,222 @@ of entries, depending on how this instance is configured.</p>
 
 
 
+
 <div class="param-desc">
     <p>A list of the URLs that were expired.</p>
+</div>
+
+
+      
+  </td>
+  </tr>
+
+
+</table>
+
+</div>
+
+</div>
+
+        
+            
+
+<div class="collapsing-entry method-type-function ">
+
+
+    <h4 class="js-collapse-title" id="isResponseFresh"><span class="this">this.</span>isResponseFresh<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"> <span class="return-arrow">&rarr;</span> boolean</span></h4>
+
+
+<div class="collapse-details js-collapse-details">
+
+
+  
+
+  <div class="description">
+    <p>Checks whether a <code>Response</code> is fresh, based on the <code>Response</code>'s
+<code>Date</code> header and the configured <code>maxAgeSeconds</code>.</p>
+<p>If <code>maxAgeSeconds</code> or the <code>Date</code> header is not set then it will
+default to returning <code>true</code>.</p>
+  </div>
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>expirationBehavior.isResponseFresh({
+  cachedResponse: responseFromCache
+});</code></pre>
+
+
+
+<table class="method-info-table">
+
+  
+
+  
+
+  
+
+
+  <tr>
+    <th>Parameters</th>
+    <td>
+      
+
+<table class="params">
+    
+
+        <tr>
+            
+              <td class="name">input</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+
+            
+            </td>
+
+            
+              <td></td>
+            
+
+            <tr>
+              <td></td>
+              <td class="description last">
+                
+                
+                  <h6>Properties</h6>
+                  
+
+<table class="params">
+    
+
+        <tr>
+            
+              <td class="name">cachedResponse</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Response</span>
+
+
+
+            
+
+            
+            </td>
+
+            
+              <td></td>
+            
+
+            <tr>
+              <td></td>
+              <td class="description last">
+                <p>The <code>Response</code> object that's been
+       read from a cache and whose freshness should be checked.</p>
+                
+              </td>
+            </tr>
+        </tr>
+
+    
+</table>
+
+                
+              </td>
+            </tr>
+        </tr>
+
+    
+</table>
+
+    </td>
+  </tr>
+
+
+<!--
+<tr>
+<th>Details</th>
+<td>
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+</td>
+</tr>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+  <tr>
+  <th>Returns</th>
+  <td>
+  
+          
+
+
+
+<span class="param-type">boolean</span>
+
+
+
+
+
+<div class="param-desc">
+    <p>Either the <code>true</code>, if it's fresh, or <code>false</code> if the
+         <code>Response</code> is older than <code>maxAgeSeconds</code>.</p>
 </div>
 
 
@@ -570,6 +785,14 @@ of entries, depending on how this instance is configured.</p>
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>expirationBehavior.updateTimestamp({
+  cacheName: 'example-cache-name',
+  url: '/example-url'
+});</code></pre>
+
+
 
 <table class="method-info-table">
 
@@ -599,6 +822,7 @@ of entries, depending on how this instance is configured.</p>
 <span class="param-type">Object</span>
 
 
+
             
 
             
@@ -611,7 +835,7 @@ of entries, depending on how this instance is configured.</p>
             <tr>
               <td></td>
               <td class="description last">
-                <p>The input object to this function.</p>
+                
                 
                   <h6>Properties</h6>
                   
@@ -628,6 +852,7 @@ of entries, depending on how this instance is configured.</p>
             
                 
 <span class="param-type">string</span>
+
 
 
             
@@ -669,6 +894,7 @@ of entries, depending on how this instance is configured.</p>
 <span class="param-type">string</span>
 
 
+
             
 
             
@@ -689,7 +915,7 @@ of entries, depending on how this instance is configured.</p>
             <tr>
               <td></td>
               <td class="description last">
-                
+                <p>The URL for the entry to update.</p>
                 
               </td>
             </tr>
@@ -706,6 +932,7 @@ of entries, depending on how this instance is configured.</p>
             
                 
 <span class="param-type">Number</span>
+
 
 
             
@@ -757,8 +984,9 @@ of entries, depending on how this instance is configured.</p>
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 

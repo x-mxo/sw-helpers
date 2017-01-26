@@ -33,7 +33,7 @@ two Response objects differ.</p>
 passing it to a
 <a href="module-sw-runtime-caching.RequestWrapper.html#main">RequestWrapper</a>,
 as shown in the first example below.</p>
-<p>You can listen for updates from you web app by adding an event listener on
+<p>You can listen for updates from your web app by adding an event listener on
 a browser channel with the same channel name as the Behavior,
 which 'cache-updates' in the second example below.</p></div>
         
@@ -96,8 +96,9 @@ updateChannel.addEventListener('message', event => {
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 
@@ -192,9 +193,18 @@ updateChannel.addEventListener('message', event => {
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Prints 'CACHE_UPDATED'
+console.log(goog.broadcastCacheUpdate.cacheUpdatedMessageType);</code></pre>
+
+
+
 
 
 <dl class="details">
+
+    
 
     
 
@@ -229,15 +239,6 @@ updateChannel.addEventListener('message', event => {
 
 
 
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>// Prints 'CACHE_UPDATED'
-console.log(goog.broadcastCacheUpdate.cacheUpdatedMessageType);</code></pre>
-
-
-
 </div>
 </div>
 
@@ -269,7 +270,7 @@ by an instance of the Behavior class. It's exposed here for the
 benefit of developers who would rather not use the full <code>Behavior</code>
 implementation.</p>
 <p>Calling this will dispatch a message on the provided <a href="https://developers.google.com/web/updates/2016/09/broadcastchannel">Broadcast Channel</a>
-to notifiy interested subscribed about a change to a cached resource.</p>
+to notifiy interested subscribers about a change to a cached resource.</p>
 <p>The message that's posted has a formation inspired by the
 <a href="https://github.com/acdlite/flux-standard-action#introduction">Flux standard action</a>
 format like so:</p>
@@ -325,6 +326,7 @@ all required.)</p>
 <span class="param-type">Object</span>
 
 
+
             
 
             
@@ -356,6 +358,7 @@ all required.)</p>
 <span class="param-type">BroadcastChannel</span>
 
 
+
             
 
             
@@ -385,6 +388,7 @@ all required.)</p>
             
                 
 <span class="param-type">string</span>
+
 
 
             
@@ -419,6 +423,7 @@ all required.)</p>
 <span class="param-type">string</span>
 
 
+
             
 
             
@@ -448,6 +453,7 @@ all required.)</p>
             
                 
 <span class="param-type">string</span>
+
 
 
             
@@ -490,8 +496,9 @@ all required.)</p>
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 
@@ -609,6 +616,7 @@ the same or not.</p>
 <span class="param-type">Object</span>
 
 
+
             
 
             
@@ -638,6 +646,7 @@ the same or not.</p>
             
                 
 <span class="param-type">Response</span>
+
 
 
             
@@ -671,6 +680,7 @@ the same or not.</p>
 <span class="param-type">Response</span>
 
 
+
             
 
             
@@ -700,6 +710,7 @@ the same or not.</p>
             
                 
 <span class="param-type">Array.&lt;string></span>
+
 
 
             
@@ -742,8 +753,9 @@ the same or not.</p>
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 
@@ -800,6 +812,7 @@ the same or not.</p>
 
 
 <span class="param-type">boolean</span>
+
 
 
 

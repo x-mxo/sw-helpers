@@ -35,6 +35,9 @@ entry should be written.</li>
 <li><code>cacheDidUpdate({cacheName, oldResponse, newResponse})</code>: Called whenever
 an entry is written to the cache, giving the callback a chance to notify
 clients about the update or implement cache expiration.</li>
+<li><code>cacheWillMatch({cachedResponse})</code>: Called whenever a response is read
+from the cache and is about to be used, giving the callback a chance to
+perform validity/freshness checks.</li>
 <li><code>fetchDidFail({request})</code>: Called whenever a network request fails.</li>
 </ul>
         
@@ -111,6 +114,7 @@ registered behaviors if the request fails.</p>
 <span class="param-type">Object</span>
 
 
+
             
 
             
@@ -143,6 +147,7 @@ registered behaviors if the request fails.</p>
 |
 
 <span class="param-type">string</span>
+
 
 
             
@@ -184,8 +189,9 @@ registered behaviors if the request fails.</p>
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 
@@ -242,6 +248,7 @@ registered behaviors if the request fails.</p>
 
 
 <span class="param-type">Promise.&lt;Response></span>
+
 
 
 
@@ -316,6 +323,7 @@ lifecycle callback.</p>
 <span class="param-type">Object</span>
 
 
+
             
 
             
@@ -345,6 +353,7 @@ lifecycle callback.</p>
             
                 
 <span class="param-type">Request</span>
+
 
 
             
@@ -384,6 +393,7 @@ lifecycle callback.</p>
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -437,8 +447,9 @@ lifecycle callback.</p>
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 
@@ -499,6 +510,7 @@ lifecycle callback.</p>
 
 
 
+
 <div class="param-desc">
     <p>The network response.</p>
 </div>
@@ -552,8 +564,9 @@ lifecycle callback.</p>
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 
@@ -610,6 +623,7 @@ lifecycle callback.</p>
 
 
 <span class="param-type">Cache</span>
+
 
 
 
@@ -681,6 +695,7 @@ options.</p>
 <span class="param-type">Object</span>
 
 
+
             
 
             
@@ -713,6 +728,7 @@ options.</p>
 |
 
 <span class="param-type">string</span>
+
 
 
             
@@ -754,8 +770,9 @@ options.</p>
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 
@@ -812,6 +829,7 @@ options.</p>
 
 
 <span class="param-type">Promise.&lt;Response></span>
+
 
 
 

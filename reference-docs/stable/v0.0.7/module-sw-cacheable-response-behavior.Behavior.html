@@ -22,36 +22,24 @@ jsdocNav:
     
         <h2>Behavior</h2>
         
+            <p>Use this behavior to cache responses with certain HTTP status codes or
+header values.</p>
+<p>Defining both status codes and headers will cache requests with a matching
+status code and a matching header.</p>
+        
     
 
     
       
-          <h3>Examples</h3>
+          <h3>Example</h3>
           
-    <pre class="prettyprint"><code>// Used as an automatically invoked as "behavior" by a RequestWrapper:
-
-const cacheName = 'runtime-cache';
-const requestWrapper = new goog.runtimeCaching.RequestWrapper({
-  cacheName,
-  behaviors: [
-    new goog.cacheableResponse.Behavior({
-      statuses: [0, 200, 404]
-    })
-  ]
-});
-
-// Set up a route to match any requests made against the example.com domain.
-// The responses will be cached if the response code is 0, 200, or 404, and
-// will not be cached otherwise.
-const route = new goog.routing.RegExpRoute({
-  match: ({url}) => url.domain === 'example.com',
-  handler: new goog.runtimeCaching.StaleWhileRevalidate({requestWrapper})
-});</code></pre>
-
-    <pre class="prettyprint"><code>// Explicitly invoked usage independent of the goog.routing framework, via
-// the isResponseCacheable() method:
-
-// TODO: Write sample code.</code></pre>
+    <pre class="prettyprint"><code>new goog.cacheableResponse.Behavior({
+  statuses: [0, 200, 404],
+  headers: {
+    'Example-Header-1': 'Header-Value-1'
+    'Example-Header-1': 'Header-Value-2'
+  }
+})</code></pre>
 
       
 
@@ -110,6 +98,7 @@ the <code>Response</code> needs to meet all of the criteria to be cacheable.</p>
 <span class="param-type">Object</span>
 
 
+
             
 
             
@@ -122,7 +111,7 @@ the <code>Response</code> needs to meet all of the criteria to be cacheable.</p>
             <tr>
               <td></td>
               <td class="description last">
-                <p>The input object to this function.</p>
+                
                 
                   <h6>Properties</h6>
                   
@@ -139,6 +128,7 @@ the <code>Response</code> needs to meet all of the criteria to be cacheable.</p>
             
                 
 <span class="param-type">Array.&lt;Number></span>
+
 
 
             
@@ -181,6 +171,7 @@ the <code>Response</code> needs to meet all of the criteria to be cacheable.</p>
             
                 
 <span class="param-type">Object.&lt;String, String></span>
+
 
 
             
@@ -233,8 +224,9 @@ the <code>Response</code> needs to meet all of the criteria to be cacheable.</p>
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 

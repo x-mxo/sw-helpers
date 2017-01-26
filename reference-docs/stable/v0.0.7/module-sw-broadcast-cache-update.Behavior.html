@@ -24,7 +24,7 @@ jsdocNav:
         
             <p>Can be used to compare two <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Responses</a>
 and uses the <a href="https://developers.google.com/web/updates/2016/09/broadcastchannel">Broadcast Channel API</a>
-to notify interested parties when those Responses differ.</p>
+to notify interested parties when those responses differ.</p>
 <p>For efficiency's sake, the underlying response bodies are not compared;
 only specific response headers are checked.</p>
         
@@ -34,12 +34,10 @@ only specific response headers are checked.</p>
       
           <h3>Examples</h3>
           
-        <p class="code-caption">Added as a "behavior" to a RequestWrapper to
-automatically dispatch messages</p>
+        <p class="code-caption">Added as a "behavior" to a `RequestWrapper` to
+automatically dispatch messages on a cache update</p>
     
-    <pre class="prettyprint"><code>// Messages will be dispatched by RequestWrapper whenever the cache
-// is updated.
-const requestWrapper = new goog.runtimeCaching.RequestWrapper({
+    <pre class="prettyprint"><code>const requestWrapper = new goog.runtimeCaching.RequestWrapper({
   cacheName: 'runtime-cache',
   behaviors: [
     new goog.broadcastCacheUpdate.Behavior({channelName: 'cache-updates'})
@@ -65,7 +63,7 @@ const oldResponse = await cache.match(url);
 const newResponse = await fetch(url);
 await cache.put(url, newResponse);
 
-// Only check for an update if there was a previously cached Response.
+// Only check for an update if there was a previously cached response.
 if (oldResponse) {
   cacheUpdateBehavior.notifyIfUpdated({
     first: oldResponse,
@@ -94,8 +92,9 @@ if (oldResponse) {
   
 
   <div class="description">
-    <p>To instantiate this Class you must provide a channel name which
-will be used to when creating a broadcast channel to dispatch messages on.</p>
+    <p>Dispatches cache update messages when a cached response has been updated.
+Messages will be dispatched on a broadcast channel with the name provided
+as channelName parameter in the constructor.</p>
   </div>
 
 
@@ -129,6 +128,7 @@ will be used to when creating a broadcast channel to dispatch messages on.</p>
 <span class="param-type">Object</span>
 
 
+
             
 
             
@@ -158,6 +158,7 @@ will be used to when creating a broadcast channel to dispatch messages on.</p>
             
                 
 <span class="param-type">string</span>
+
 
 
             
@@ -192,6 +193,7 @@ will be used to when creating a broadcast channel to dispatch messages on.</p>
 <span class="param-type">Array.&lt;string></span>
 
 
+
             
 
             
@@ -205,7 +207,7 @@ will be used to when creating a broadcast channel to dispatch messages on.</p>
               <td></td>
               <td class="description last">
                 <p>A list of headers that will be
-       used to determine whether the <code>Response</code>s differ. Defaults to
+       used to determine whether the responses differ. Defaults to
        <code>['content-length', 'etag', 'last-modified']</code>.</p>
                 
               </td>
@@ -223,6 +225,7 @@ will be used to when creating a broadcast channel to dispatch messages on.</p>
             
                 
 <span class="param-type">string</span>
+
 
 
             
@@ -265,8 +268,9 @@ will be used to when creating a broadcast channel to dispatch messages on.</p>
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 
@@ -356,7 +360,7 @@ will be used to when creating a broadcast channel to dispatch messages on.</p>
 
   <div class="description">
     <p>An explicit method to call from your own code to trigger the comparison of
-two <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response</a>
+two <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Responses</a>
 and fire off a notification via the
 <a href="https://developers.google.com/web/updates/2016/09/broadcastchannel">Broadcast Channel API</a>
 if they differ.</p>
@@ -393,6 +397,7 @@ if they differ.</p>
 <span class="param-type">Object</span>
 
 
+
             
 
             
@@ -422,6 +427,7 @@ if they differ.</p>
             
                 
 <span class="param-type">Response</span>
+
 
 
             
@@ -456,6 +462,7 @@ if they differ.</p>
 <span class="param-type">Response</span>
 
 
+
             
 
             
@@ -488,6 +495,7 @@ if they differ.</p>
 <span class="param-type">string</span>
 
 
+
             
 
             
@@ -500,7 +508,7 @@ if they differ.</p>
             <tr>
               <td></td>
               <td class="description last">
-                <p>Name of the cache the Responses belong to.</p>
+                <p>Name of the cache the responses belong to.</p>
                 
               </td>
             </tr>
@@ -527,8 +535,9 @@ if they differ.</p>
 <td>
 
 
-
 <dl class="details">
+
+    
 
     
 
