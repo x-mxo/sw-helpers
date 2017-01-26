@@ -420,7 +420,52 @@ lifecycle callback.</p>
               <td class="description last">
                 <p><code>true</code> means the method should wait
        for the cache.put() to complete before returning. The default value
-       of <code>false</code> means return without waiting.</p>
+       of <code>false</code> means return without waiting. It this value is true
+       and the response can't be cached, an error will be thrown.</p>
+                
+              </td>
+            </tr>
+        </tr>
+
+    
+
+        <tr>
+            
+              <td class="name">cacheKey</td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Request</span>
+
+
+
+            
+
+            
+                
+                
+
+                
+
+                
+                
+                  <span class="param-attributes">(Optional)</span>
+                  
+            
+            </td>
+
+            
+              <td></td>
+            
+
+            <tr>
+              <td></td>
+              <td class="description last">
+                <p>Supply a cacheKey if you wish to cache
+       the response against an alternative request to the <code>request</code>
+       argument.</p>
                 
               </td>
             </tr>

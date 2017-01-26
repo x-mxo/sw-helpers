@@ -80,7 +80,7 @@ router.setDefaultHandler({handler: new goog.runtimeCaching.NetworkFirst()});</co
 <div class="collapsing-entry method-type-function ">
 
 
-    <h4 class="js-collapse-title" id="registerRoute"><span class="this">this.</span>registerRoute<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"> <span class="return-arrow">&rarr;</span> void</span></h4>
+    <h4 class="js-collapse-title" id="registerRoute"><span class="this">this.</span>registerRoute<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"></span></h4>
 
 
 <div class="collapse-details js-collapse-details">
@@ -92,6 +92,13 @@ router.setDefaultHandler({handler: new goog.runtimeCaching.NetworkFirst()});</co
     <p>Registers a single route with the router.</p>
   </div>
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>router.registerRoutes({
+  route: new Route({ ... })
+});</code></pre>
 
 
 
@@ -245,16 +252,6 @@ router.setDefaultHandler({handler: new goog.runtimeCaching.NetworkFirst()});</co
 
 
 
-  <tr>
-  <th>Returns</th>
-  <td>
-  
-          
-
-      
-  </td>
-  </tr>
-
 
 </table>
 
@@ -268,7 +265,7 @@ router.setDefaultHandler({handler: new goog.runtimeCaching.NetworkFirst()});</co
 <div class="collapsing-entry method-type-function ">
 
 
-    <h4 class="js-collapse-title" id="registerRoutes"><span class="this">this.</span>registerRoutes<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"> <span class="return-arrow">&rarr;</span> void</span></h4>
+    <h4 class="js-collapse-title" id="registerRoutes"><span class="this">this.</span>registerRoutes<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"></span></h4>
 
 
 <div class="collapse-details js-collapse-details">
@@ -281,6 +278,17 @@ router.setDefaultHandler({handler: new goog.runtimeCaching.NetworkFirst()});</co
 router.</p>
   </div>
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>router.registerRoutes({
+  routes: [
+    new RegExpRoute({ ... }),
+    new ExpressRoute({ ... }),
+    new Route({ ... }),
+  ]
+});</code></pre>
 
 
 
@@ -357,7 +365,7 @@ router.</p>
             <tr>
               <td></td>
               <td class="description last">
-                
+                <p>An array of routes to register.</p>
                 
               </td>
             </tr>
@@ -434,16 +442,6 @@ router.</p>
 
 
 
-  <tr>
-  <th>Returns</th>
-  <td>
-  
-          
-
-      
-  </td>
-  </tr>
-
 
 </table>
 
@@ -457,7 +455,7 @@ router.</p>
 <div class="collapsing-entry method-type-function ">
 
 
-    <h4 class="js-collapse-title" id="setCatchHandler"><span class="this">this.</span>setCatchHandler<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"> <span class="return-arrow">&rarr;</span> void</span></h4>
+    <h4 class="js-collapse-title" id="setCatchHandler"><span class="this">this.</span>setCatchHandler<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"></span></h4>
 
 
 <div class="collapse-details js-collapse-details">
@@ -472,6 +470,15 @@ will be called to return an error case.</p>
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>router.setCatchHandler({
+  handler: ({event, params}) => {
+    return caches.match('/error-page.html');
+  }
+});</code></pre>
+
+
 
 <table class="method-info-table">
 
@@ -622,16 +629,6 @@ will be called to return an error case.</p>
 
 
 
-
-  <tr>
-  <th>Returns</th>
-  <td>
-  
-          
-
-      
-  </td>
-  </tr>
 
 
 </table>
@@ -646,7 +643,7 @@ will be called to return an error case.</p>
 <div class="collapsing-entry method-type-function ">
 
 
-    <h4 class="js-collapse-title" id="setDefaultHandler"><span class="this">this.</span>setDefaultHandler<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"> <span class="return-arrow">&rarr;</span> void</span></h4>
+    <h4 class="js-collapse-title" id="setDefaultHandler"><span class="this">this.</span>setDefaultHandler<span class="signature">(<span class="signature-args">input</span>)</span><span class="type-signature"></span></h4>
 
 
 <div class="collapse-details js-collapse-details">
@@ -659,6 +656,13 @@ will be called to return an error case.</p>
 request doesn't have a matching route.</p>
   </div>
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>router.setDefaultHandler({
+  handler: new goog.runtimeCaching.NetworkFirst()
+});</code></pre>
 
 
 
@@ -811,16 +815,6 @@ request doesn't have a matching route.</p>
 
 
 
-
-  <tr>
-  <th>Returns</th>
-  <td>
-  
-          
-
-      
-  </td>
-  </tr>
 
 
 </table>

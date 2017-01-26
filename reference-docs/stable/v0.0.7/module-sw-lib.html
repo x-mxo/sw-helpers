@@ -27,8 +27,9 @@ jsdocNav:
 
     
         
-            <div class="description"><p>The sw-lib module is a high-level library that makes it easier to
-configure routes with caching strategies as well as manage precaching
+            <div class="description"><h1 id="sw-lib">sw-lib</h1>
+<p>A high-level library that makes it easier to configure routes with
+caching strategies as well as manage precaching
 of assets during the install step of a service worker.</p></div>
         
 
@@ -44,46 +45,34 @@ of assets during the install step of a service worker.</p></div>
 
 
 
-    <h5>Example</h5>
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Adding the Library to your project.</p>
     
     <pre class="prettyprint"><code>importScripts('/&lt;Path to Module>/build/sw-lib.min.js');
 
-// cacheRevisionedAssets() can take an array of strings with
-// the revision details in the url.
-goog.swlib.cacheRevisionedAssets([
-    '/styles/main.1234.css',
-    '/images/logo.abcd.jpg'
+console.log(self.goog.swlib);</code></pre>
+
+        <p class="code-caption">Caching assets and registering routes.</p>
+    
+    <pre class="prettyprint"><code>goog.swlib.cacheRevisionedAssets([
+  {
+    url: '/',
+    revision: '1234'
+  },
+  {
+    url: '/styles/main.css',
+    revision: 'abcd'
+  }
 ]);
 
-// Or it can accept objects with the URL and revision data
-// kept seperate.
-goog.swlib.cacheRevisionedAssets([
-    {
-      url: '/index.html',
-      revision: '1234'
-    },
-    {
-      url: '/about.html',
-      revision: 'abcd'
-    }
-]);
-
-// If you have assets that aren't revisioned, you can cache them
-// during the installation of you service worker using warmRuntimeCache()
-goog.swlib.warmRuntimeCache([
-    '/scripts/main.js',
-    '/images/default-avater.png'
-]);
-
-// warmRuntimeCache can also accept Requests, in case you need greater
-// control over the request.
-goog.swlib.warmRuntimeCache([
-    new Request('/images/logo.png'),
-    new Request('/api/data.json')
-]);
-
-goog.swlib.router.registerRoute('/', goog.swlib.cacheFirst);
-goog.swlib.router.registerRoute('/example/', goog.swlib.networkFirst);</code></pre>
+// Register runtime routes like so.
+goog.swlib.router.registerRoute(
+  '/example/', goog.swlib.staleWhileRevalidate());
+goog.swlib.router.registerRoute(
+  /\/images\/(.*\/)?.*\.(png|jpg|jpeg|gif)/, goog.swlib.cacheFirst());
+goog.swlib.router.registerRoute(
+  '/styles/:filename', goog.swlib.cacheFirst());</code></pre>
 
 
 
@@ -170,7 +159,7 @@ goog.swlib.router.registerRoute('/example/', goog.swlib.networkFirst);</code></p
 
         <div class="subsection-classes">
         <dl>
-            <dt><a href="module-sw-lib.RouterWrapper.html#main">RouterWrapper</a></dt>
+            <dt><a href="module-sw-lib.Router.html#main">Router</a></dt>
             <dd></dd>
         
             <dt><a href="module-sw-lib.SWLib.html#main">SWLib</a></dt>
