@@ -259,6 +259,11 @@ class SWCli {
     });
   }
 
+  /**
+   * @private
+   * @param {String} rootDirectory
+   * @return {Promise&lt;Array&lt;String>>}
+   */
   _getFileExtensionsToCache(rootDirectory) {
     return this._getFileContents(rootDirectory)
     .then((files) => {
@@ -295,6 +300,11 @@ class SWCli {
     });
   }
 
+  /**
+   * @private
+   * @param {String} directory
+   * @return {Promise&lt;String>} Files in the directory
+   */
   _getFileContents(directory) {
     return new Promise((resolve, reject) => {
       fs.readdir(directory, (err, directoryContents) => {
@@ -328,6 +338,12 @@ class SWCli {
     });
   }
 
+  /**
+   * @private
+   * @param {Array&lt;String>} files In directory which should indicate the
+   * available extensions to offer the user.
+   * @return {Promise&lt;Array&lt;String>>}
+   */
   _getFileExtensions(files) {
     const fileExtensions = new Set();
     files.forEach((file) => {
@@ -347,6 +363,10 @@ class SWCli {
       (fileExtension) => fileExtension.replace(/^\./, ''));
   }
 
+  /**
+   * @private
+   * @return {Promise&lt;String>}
+   */
   _getFileManifestName() {
     return inquirer.prompt([
       {
@@ -376,6 +396,10 @@ class SWCli {
     });
   }
 
+  /**
+   * @private
+   * @return {Promise&lt;String>}
+   */
   _getServiceWorkerName() {
     return inquirer.prompt([
       {
@@ -405,6 +429,10 @@ class SWCli {
     });
   }
 
+  /**
+   * @private
+   * @return {Promise&lt;boolean>}
+   */
   _saveConfigFile() {
     return inquirer.prompt([
       {
