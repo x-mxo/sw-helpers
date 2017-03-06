@@ -1,5 +1,9 @@
 {% include variables.html %}
 
+{% for item in all_categories %}
+{{ item }}
+{% endfor %}
+
 {% if include.depth == nil %}
   {% assign currentPathDepth = 0 %}
 {% else %}
