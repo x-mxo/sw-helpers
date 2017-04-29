@@ -6,9 +6,6 @@ const swTestingHelpers = require('sw-testing-helpers');
 
 const testServerGen = require('./test-server-generator.js');
 
-/* eslint-disable no-console, require-jsdoc, no-invalid-this, max-len */
-/* eslint-env mocha */
-
 class TestRunner {
   constructor(packageNames) {
     this._packagePathsToTest = packageNames.map((packageName) => {

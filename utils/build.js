@@ -13,8 +13,6 @@
  limitations under the License.
 */
 
-/* eslint-disable no-console, valid-jsdoc */
-
 const babel = require('gulp-babel');
 const childProcess = require('child_process');
 const commonjs = require('rollup-plugin-commonjs');

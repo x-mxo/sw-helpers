@@ -22,8 +22,6 @@
  * There are two servers so tests can make requests to a foreign origin.
  */
 
-/* eslint-disable valid-jsdoc */
-
 const ServerInstance = require('./server-instance');
 
 const getNewServerInstance = () => {

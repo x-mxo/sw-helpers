@@ -13,8 +13,6 @@
  limitations under the License.
  */
 
-/* eslint-disable require-jsdoc */
-
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const fs = require('fs');
