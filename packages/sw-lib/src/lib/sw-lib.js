@@ -13,7 +13,6 @@
  limitations under the License.
 */
 
-/* eslint-env browser, serviceworker */
 
 import Router from './router.js';
 import Strategies from './strategies';

@@ -14,7 +14,6 @@ mocha.setup({
   globals: ['fetch'],
 });
 
-/* eslint-disable no-unused-vars */
 
 function expectDifferentResponseBodies(first, second) {
   return expectResponseBodyComparisonToBe(false, first, second);

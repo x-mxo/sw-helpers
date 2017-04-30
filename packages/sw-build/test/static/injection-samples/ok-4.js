@@ -1,4 +1,3 @@
-/* global swlib */
 // Example code above
 
 importScripts('./sample-import.js');

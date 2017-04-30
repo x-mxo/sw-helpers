@@ -1,4 +1,3 @@
-/* global goog */
 
 // Multiple entries.
 

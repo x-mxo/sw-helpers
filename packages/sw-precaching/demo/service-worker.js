@@ -1,4 +1,3 @@
-/* global goog */
 
 importScripts('../build/sw-precaching.js');
 importScripts('./manifest.123456.js');

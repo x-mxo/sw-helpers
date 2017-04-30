@@ -1,4 +1,3 @@
-/* global goog, expect */
 
 describe('sw-precaching Test Revisioned Caching', function() {
   const STATIC_ASSETS_PATH = '/packages/sw-precaching/test/static';

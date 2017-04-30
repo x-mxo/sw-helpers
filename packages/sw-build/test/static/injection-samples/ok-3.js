@@ -1,4 +1,3 @@
-/* global goog */
 // Example code above
 
 importScripts('./sample-import.js');

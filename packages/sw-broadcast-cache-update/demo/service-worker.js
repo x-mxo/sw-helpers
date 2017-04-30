@@ -1,5 +1,3 @@
-/* eslint-env worker, serviceworker */
-/* global goog */
 
 importScripts(
   '../../sw-routing/build/routing.js',

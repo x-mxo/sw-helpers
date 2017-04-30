@@ -1,4 +1,3 @@
-/* global goog */
 
 importScripts('/packages/sw-routing/build/sw-routing.min.js');
 

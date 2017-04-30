@@ -7,7 +7,6 @@ const path = require('path');
 const querystring = require('querystring');
 const seleniumAssistant = require('selenium-assistant');
 
-/* eslint-disable require-jsdoc */
 
 let globalDriverBrowser;
 

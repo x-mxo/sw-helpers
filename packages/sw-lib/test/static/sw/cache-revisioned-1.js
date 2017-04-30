@@ -1,4 +1,3 @@
-/* global goog */
 
 importScripts('/packages/sw-lib/build/sw-lib.min.js');
 importScripts('/packages/sw-precaching/test/static/skip-and-claim.js');

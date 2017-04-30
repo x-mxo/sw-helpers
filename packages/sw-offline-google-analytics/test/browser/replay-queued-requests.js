@@ -11,8 +11,6 @@
  limitations under the License.
  */
 
-/* eslint-env mocha, browser */
-/* global chai, goog, MockDate, sinon */
 
 'use strict';
 

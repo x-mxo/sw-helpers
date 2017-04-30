@@ -3,9 +3,10 @@ module.exports = {
     mocha: true,
   },
   globals: {
+    chai: false,
     expect: false,
-    goog: false,
     sinon: false,
+    MockDate: false,
   },
   rules: {
     'max-len': 0,

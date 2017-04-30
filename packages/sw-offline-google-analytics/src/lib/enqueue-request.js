@@ -11,7 +11,6 @@
  limitations under the License.
  */
 
-/* eslint-env worker, serviceworker */
 
 import IDBHelper from '../../../../lib/idb-helper.js';
 import constants from './constants.js';

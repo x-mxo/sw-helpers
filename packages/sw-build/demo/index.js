@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 const swBuild = require('../build/index');
 
 swBuild.generateFileManifest({

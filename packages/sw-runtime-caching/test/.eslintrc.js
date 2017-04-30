@@ -4,5 +4,8 @@ module.exports = {
     expectDifferentResponseBodies: false,
     expectSameResponseBodies: false,
     generateCrossOriginUrl: false,
-  }
+  },
+  rules: {
+    'no-unused-vars': 0,
+  },
 };

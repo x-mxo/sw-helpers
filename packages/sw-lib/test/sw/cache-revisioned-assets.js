@@ -4,7 +4,6 @@ importScripts('/node_modules/sw-testing-helpers/build/browser/mocha-utils.js');
 
 importScripts('/packages/sw-lib/build/sw-lib.min.js');
 
-/* global goog */
 
 const expect = self.chai.expect;
 self.chai.should();

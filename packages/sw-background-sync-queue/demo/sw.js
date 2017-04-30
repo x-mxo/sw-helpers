@@ -1,4 +1,3 @@
-/* global goog*/
 importScripts(
 	'../build/background-sync-queue.js',
 	'../../sw-routing/build/sw-routing.js',

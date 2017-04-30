@@ -11,7 +11,6 @@
  limitations under the License.
  */
 
-/* eslint-env worker, serviceworker */
 
 import constants from './lib/constants.js';
 import enqueueRequest from './lib/enqueue-request.js';

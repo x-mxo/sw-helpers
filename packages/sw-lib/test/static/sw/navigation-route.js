@@ -1,4 +1,3 @@
-/* global goog */
 
 importScripts('/packages/sw-lib/build/sw-lib.min.js');
 

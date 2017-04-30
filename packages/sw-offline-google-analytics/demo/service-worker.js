@@ -1,5 +1,3 @@
-/* eslint-env worker, serviceworker */
-/* global goog */
 
 const CACHE_NAME = 'runtime-caching';
 self.goog = {DEBUG: true};

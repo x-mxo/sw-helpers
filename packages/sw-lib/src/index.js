@@ -13,7 +13,6 @@
  limitations under the License.
 */
 
-/* eslint-env browser */
 
 import ErrorFactory from './lib/error-factory';
 import SWLib from './lib/sw-lib';

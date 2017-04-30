@@ -1,4 +1,3 @@
-/* global goog, expect */
 
 describe('cache-revisioned-e2e.js', function() {
   const deleteIndexedDB = () => {

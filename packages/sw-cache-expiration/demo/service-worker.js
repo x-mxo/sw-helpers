@@ -1,5 +1,3 @@
-/* eslint-env worker, serviceworker */
-/* global goog */
 
 // Import the helper libraries into our service worker's global scope.
 importScripts(

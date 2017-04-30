@@ -1,4 +1,3 @@
-/* global goog */
 
 importScripts('../build/sw-lib.js');
 importScripts('./manifest.123456.js');
