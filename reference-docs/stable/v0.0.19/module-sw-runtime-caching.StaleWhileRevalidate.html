@@ -27,8 +27,14 @@ jsdocNav:
         
             <p>An implementation of a <a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#stale-while-revalidate">stale-while-revalidate</a>
 request strategy.</p>
-<p>In addition to updating the appropriate caches, it will also trigger any
-appropriate plugins defined in the underlying <code>RequestWrapper</code>.</p>
+<p>Resources are requested from both the cache and the network in parallel, then
+responds with the cached version. The cache is replaced with whatever returns
+from the network. In addition to updating the appropriate caches, it will
+also trigger any appropriate plugins defined in the underlying
+<code>RequestWrapper</code>.</p>
+<p>This strategy is the closest equivalent to the sw-toolbox
+<a href="https://googlechrome.github.io/sw-toolbox/api.html#toolboxfastest">fastest</a>
+strategy.</p>
 <p>By default, <code>StaleWhileRevalidate</code> will cache responses with a 200 status
 code as well as <a href="http://stackoverflow.com/q/39109789">opaque responses</a>
 (responses from cross-origin servers which don't support

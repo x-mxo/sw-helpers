@@ -148,7 +148,7 @@ router.registerRoute({route});</code></pre>
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">String</span>
 
 
 
@@ -173,9 +173,9 @@ router.registerRoute({route});</code></pre>
               <td></td>
               <td class="description last">
                 <p>The path to use for routing.
-       If the path contains <a href="https://github.com/pillarjs/path-to-regexp#named-parameters">named parameters</a>,
-       then an Object mapping parameter names to the corresponding value
-       will be passed to the handler via <code>params</code>.</p>
+If the path contains <a href="https://github.com/pillarjs/path-to-regexp#named-parameters">named parameters</a>,
+then an Object that maps parameter names to their corresponding value
+will be passed to the handler via <code>params</code>.</p>
                 
               </td>
             </tr>
@@ -191,7 +191,7 @@ router.registerRoute({route});</code></pre>
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><a href="module-sw-routing.html#.RouteHandler">RouteHandler</a></span>
 
 
 
@@ -215,8 +215,8 @@ router.registerRoute({route});</code></pre>
             <tr>
               <td></td>
               <td class="description last">
-                <p>An Object with a <code>handle</code> method that
-       will be used to respond to matching requests.</p>
+                <p>The handler to use to
+provide a response if the route matches.</p>
                 
               </td>
             </tr>
@@ -259,7 +259,7 @@ router.registerRoute({route});</code></pre>
               <td></td>
               <td class="description last">
                 <p>Only match requests that use this
-       HTTP method. Defaults to <code>'GET'</code> if not specified.</p>
+HTTP method. Defaults to <code>'GET'</code> if not specified.</p>
                 
               </td>
             </tr>

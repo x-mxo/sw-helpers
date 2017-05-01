@@ -290,7 +290,7 @@ router.setDefaultHandler({handler: new goog.runtimeCaching.NetworkFirst()});</co
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>router.registerRoutes({
+    <pre class="prettyprint"><code>router.registerRoute({
   route: new Route({ ... })
 });</code></pre>
 
@@ -353,7 +353,7 @@ router.setDefaultHandler({handler: new goog.runtimeCaching.NetworkFirst()});</co
             <td class="type">
             
                 
-<span class="param-type">Route</span>
+<span class="param-type"><a href="module-sw-routing.Route.html#main">Route</a></span>
 
 
 
@@ -559,7 +559,8 @@ router.</p>
             <tr>
               <td></td>
               <td class="description last">
-                <p>An array of routes to register.</p>
+                <p>An array of routes to
+register.</p>
                 
               </td>
             </tr>
@@ -658,18 +659,19 @@ router.</p>
   
 
   <div class="description">
-    <p>If a Route throws an error while handling a request, this catch handler
-will be called to return an error case.</p>
+    <p>If a Route throws an error while handling a request, this {RouteHandler}
+will be called and given a chance to provide a response.</p>
   </div>
 
 
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>router.setCatchHandler({
-  handler: ({event, params}) => {
+    <pre class="prettyprint"><code>router.setCatchHandler(({event}) => {
+  if (event.request.mode === 'navigate') {
     return caches.match('/error-page.html');
   }
+  return Response.error();
 });</code></pre>
 
 
@@ -731,7 +733,7 @@ will be called to return an error case.</p>
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><a href="module-sw-routing.html#.RouteHandler">RouteHandler</a></span>
 
 
 
@@ -747,7 +749,8 @@ will be called to return an error case.</p>
             <tr>
               <td></td>
               <td class="description last">
-                <p>An Object with a <code>handle</code> method.</p>
+                <p>The handler to use to
+provide a response.</p>
                 
               </td>
             </tr>
@@ -846,8 +849,10 @@ will be called to return an error case.</p>
   
 
   <div class="description">
-    <p>An optional default handler will have its handle method called when a
-request doesn't have a matching route.</p>
+    <p>An optional {RouteHandler} that's called by default when no routes
+explicitly match the incoming request.</p>
+<p>If the default is not provided, unmatched requests will go against the
+network as if there were no service worker present.</p>
   </div>
 
 
@@ -917,7 +922,7 @@ request doesn't have a matching route.</p>
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><a href="module-sw-routing.html#.RouteHandler">RouteHandler</a></span>
 
 
 
@@ -933,7 +938,8 @@ request doesn't have a matching route.</p>
             <tr>
               <td></td>
               <td class="description last">
-                <p>An Object with a <code>handle</code> method.</p>
+                <p>The handler to use to
+provide a response.</p>
                 
               </td>
             </tr>

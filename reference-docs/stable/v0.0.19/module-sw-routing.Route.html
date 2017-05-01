@@ -26,26 +26,14 @@ jsdocNav:
         
             <p>A <code>Route</code> allows you to tell a service worker that it should handle
 certain network requests using a specific response strategy.</p>
-<p>Two configuration options are required:</p>
-<ul>
-<li>A <code>match</code> function, which examines
-an incoming <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request"><code>Request</code></a>
-to determine whether this <code>Route</code> should apply. The function should return
-a <a href="https://developer.mozilla.org/en-US/docs/Glossary/Truthy">truthy</a> value
-if the <code>Route</code> matches, in which case that return value is passed along to
-the <code>handle</code> function.</li>
-<li>A <code>handler</code> object, which should in turn have a function defined on it
-named <code>handle</code>. This <code>handle</code> function is given the incoming request along
-with any additional parameters generated during the <code>match</code>, and returns a
-Promise for a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Response"><code>Response</code></a>.</li>
-</ul>
-<p>Instead of implementing your own <code>handler</code>, you can use one of the
+<p>Instead of implementing your own handlers, you can use one of the
 pre-defined runtime caching strategies from the
 <a href="module-sw-runtime-caching.html#main">sw-runtime-caching</a> module.</p>
-<p>While you can use <code>Route</code> directly, the <code>RegExpRoute</code>
-and <code>ExpressRoute</code> subclasses provide a convenient
-wrapper with a nicer interface for using regular expressions or Express-style
-routes as the <code>match</code> criteria.</p>
+<p>While you can use <code>Route</code> directly, the
+<a href="module-sw-routing.RegExpRoute.html#main">RegExpRoute</a>
+and <a href="module-sw-routing.ExpressRoute.html#main">ExpressRoute</a> subclasses provide a
+convenient wrapper with a nicer interface for using regular expressions or
+Express-style routes as the <code>match</code> criteria.</p>
         
     
 
@@ -176,11 +164,11 @@ router.registerRoute({route});</code></pre>
               <td></td>
               <td class="description last">
                 <p>The function that determines whether the
-       route matches. The function is passed an object with two properties:
-       <code>url</code>, which is a <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL">URL</a>,
-       and <code>event</code>, which is a <a href="https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent">FetchEvent</a>.
-       <code>match</code> should return a truthy value when the route applies, and
-       that value is passed on to the handle function.</p>
+route matches. The function is passed an object with two properties:
+<code>url</code>, which is a <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL">URL</a>,
+and <code>event</code>, which is a <a href="https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent">FetchEvent</a>.
+<code>match</code> should return a truthy value when the route applies, and
+that value is passed on to the handle function.</p>
                 
               </td>
             </tr>
@@ -196,10 +184,7 @@ router.registerRoute({route});</code></pre>
             <td class="type">
             
                 
-<span class="param-type">function</span>
-|
-
-<span class="param-type">Object</span>
+<span class="param-type"><a href="module-sw-routing.html#.RouteHandler">RouteHandler</a></span>
 
 
 
@@ -223,11 +208,8 @@ router.registerRoute({route});</code></pre>
             <tr>
               <td></td>
               <td class="description last">
-                <p>A function, or an Object with a
-       <code>handle</code> method. As parameters, the handler is passed an object with
-       the same <code>url</code> and <code>event</code> properties as <code>match</code> received, along
-       with an additional property, <code>params</code>, set to the truthy value
-       <code>match</code> returned.</p>
+                <p>The handler to use to
+provide a response if the route matches.</p>
                 
               </td>
             </tr>
@@ -270,7 +252,7 @@ router.registerRoute({route});</code></pre>
               <td></td>
               <td class="description last">
                 <p>Only match requests that use this
-       HTTP method. Defaults to <code>'GET'</code> if not specified.</p>
+HTTP method. Defaults to <code>'GET'</code> if not specified.</p>
                 
               </td>
             </tr>
