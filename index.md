@@ -7,16 +7,14 @@ navigation_weight: 0
 # Welcome to Workbox
 
 Workbox is a suite of helper libraries for service workers and progressive web
-apps designed to simplify your development experience. 
-
-Wokrbox lets you implement precaching in a manner of minutes.
-The full set of features supports such things as runtime caching, routing,
-offline analytics, background syncing, and more.
+apps that lets you implement precaching in a manner of minutes. Its features
+support runtime caching, routing, offline analytics, background syncing, and
+more.
 
 ## A service worker in two minutes
 
-Use [sw-cli](sw-cli)
-to add a service worker to an existing project in under two minutes.
+Use [sw-cli](sw-cli) to add a service worker to an existing project in under two
+minutes. 
 
 ## A build script in ten minutes
 
