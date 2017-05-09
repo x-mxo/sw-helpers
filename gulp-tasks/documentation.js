@@ -82,13 +82,13 @@ gulp.task('documentation:gh-pages', () => {
       'build',
       '--trace',
       '--config',
-      'docs/_config.yml',
+      './docs/_config.yml',
       '--source',
-      'docs/',
+      './docs/',
     ];
 
     const jekyllProcess = spawn('bundle', params, {
-      cwd: path.join(__dirname, '..', 'docs'),
+      cwd: path.join(__dirname, '..'),
       stdio: 'inherit',
     });
 
