@@ -1,79 +1,36 @@
 {% include variables.html %}
 
-{% if include.depth == nil %}
-  {% assign currentPathDepth = 0 %}
-{% else %}
-  {% assign currentPathDepth = include.depth %}
-{% endif %}
+<section class="navigation-container">
 
-{% if include.context == nil %}
-  {% assign currentContext = "/" %}
-{% else %}
-  {% assign currentContext = include.context %}
-{% endif %}
+  <!-- Hamburger Menu -->
+  <button class="svg-btn navigation-open-btn js-menu-btn">
+    <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+    </svg>
+  </button>
 
-{% comment %}
-First we need to get the list of directories for the current depth
-{% endcomment %}
+  <nav class="navigation-links js-nav-drawer">
+      <!-- Logo Header at Top of Nav Drawer -->
+      <section class="nav-drawer-header">
+        <img class="nav-drawer-header__logo" src="{{ project_root_url }}{{ site.theme_location }}/themes/images/workbox-logo-grey-small.min.svg" alt="Small Workbox Logo" />
 
-{% assign directoriesAtDepth = "" | split: "," %}
-{% for singlePage in site.pages %}
-  {% if singlePage.navigation_weight == nil %}
-    {% continue %}
-  {% endif %}
+        <button class="svg-btn navigation-close-btn js-menu-close-btn">
+          <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+          </svg>
+        </button>
+      </section>
 
-  {% assign pageDepth = singlePage.path | split: "/" | size | minus: 1 %}
-  {% if singlePage.name == "index.md" or singlePage.name == "index.html" %}
-    {% if pageDepth > 0 %}
-    {% assign pageDepth = pageDepth | minus: 1 %}
-    {% endif %}
-  {% endif %}
+      <!-- Actual Links -->
+      <ul>
+        {% for topLevelEntry in site.data.navigation %}
+          {% include/components/navigation-entry.html entry=topLevelEntry %}
+        {% endfor %}
+      </ul>
+    </nav>
 
-  {% if singlePage.url != currentContext %}
-    {% assign contextCheckParts = singlePage.url | split: currentContext %}
-    {% if contextCheckParts[0] != "" %}
-      {% continue %}
-    {% endif %}
-  {% endif %}
+    <div class="nav-backdrop js-nav-backdrop"></div>
 
-  {% if pageDepth == currentPathDepth %}
-    {% assign directoriesAtDepth = directoriesAtDepth | push: singlePage %}
-  {% endif %}
-{% endfor %}
-
-{% assign weightedPages = "" | split: "," %}
-{% assign unweightedPages = "" | split: "," %}
-{% for singlePage in directoriesAtDepth %}
-  {% if singlePage.navigation_weight != nil %}
-    {% assign weightedPages = weightedPages | push: singlePage %}
-  {% else %}
-    {% assign unweightedPages = unweightedPages | push: singlePage %}
-  {% endif %}
-{% endfor %}
-
-{% assign weightedPages = weightedPages | sort: "navigation_weight" %}
-{% assign unweightedPages = unweightedPages | sort: "path" %}
-{% for singlePage in unweightedPages %}
-  {% assign weightedPages = weightedPages | push: singlePage %}
-{% endfor %}
-
-<ul>
-{% for singlePage in weightedPages %}
-  <li class="{% if page.url contains singlePage.url %}current-section{% endif %} {% if page.url == singlePage.url %}current-page{% endif %}"><a href="{{ project_root_url }}{{singlePage.url}}#main">{{ singlePage.title }}</a></li>
-
-  {% if singlePage.url != currentContext %}
-    {% if page.url != singlePage.url %}
-      {% assign contextCheckParts = page.url | split: singlePage.url %}
-      {% if contextCheckParts[0] != "" %}
-        {% continue %}
-      {% endif %}
-    {% endif %}
-
-
-    {% assign newDepth = currentPathDepth | plus: 1 %}
-    {% include components/navigation.html context=singlePage.url depth=newDepth %}
-    {% assign currentPathDepth = currentPathDepth | minus: 1 %}
-  {% endif %}
-{% endfor %}
-</ul>
-{% comment %}<li class="{% if page.url contains entry.url %}active{% endif %}">{% endcomment %}
+</section>
