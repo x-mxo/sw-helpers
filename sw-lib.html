@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+
+  
+
+
+
+
+
+
+
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>sw-lib</title>
+  <meta name="description" content="(Currently Work in Progress) Service Worker helper libraries. ">
+
+  <!-- The docs server over HTTPS, but site.github.url points to HTTP resouce causing mixed content -->
+  <link rel="canonical" href="/sw-lib.html">
+  <link rel="alternate" type="application/rss+xml" title="sw-helpers" href="/feed.xml">
+
+  <link rel="shortcut icon" href="/themes/images/favicon.ico">
+
+  <!-- Stylesheet -->
+  <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Open+Sans:300,300i,400,600,700" rel="stylesheet">
+  <link href="/themes/styles/main.css" rel="stylesheet" type="text/css">
+
+  
+</head>
+
+
+  <body>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="navigation-container">
+
+  <!-- Hamburger Menu -->
+  <button class="svg-btn navigation-open-btn js-menu-btn">
+    <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+    </svg>
+  </button>
+
+  <nav class="navigation-links js-nav-drawer">
+      <!-- Logo Header at Top of Nav Drawer -->
+      <section class="nav-drawer-header">
+        <img class="nav-drawer-header__logo" src="/themes/images/workbox-logo-grey-small.min.svg" alt="Small Workbox Logo" />
+
+        <button class="svg-btn navigation-close-btn js-menu-close-btn">
+          <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+          </svg>
+        </button>
+      </section>
+
+      <!-- Actual Links -->
+      <ul>
+        
+          
+<li><a href="/">Getting Started</a></li>
+
+
+        
+          
+<li><a href="/sw-cli">sw-cli</a></li>
+
+
+        
+          
+<li><a href="/sw-build">sw-build</a></li>
+
+
+        
+          
+<li><a href="/sw-lib">sw-lib</a></li>
+
+
+        
+          
+<li class="drop-down-container js-drop-down-wrapper">
+  <span class="navigation-drop-down-btn js-drop-down-btn">Recipes</span>
+  <ul class="drop-down-list js-drop-down-list">
+  
+    
+<li><a href="/recipes/webpack">Web Pack</a></li>
+
+
+  
+    
+<li><a href="/recipes/gulp">Gulp</a></li>
+
+
+  
+    
+<li><a href="/recipes/rollup">Rollup</a></li>
+
+
+  
+    
+<li><a href="/recipes/grunt">Grunt</a></li>
+
+
+  
+  </ul>
+</li>
+
+
+
+        
+          
+<li><a href="/examples">Examples</a></li>
+
+
+        
+          
+<li class="drop-down-container js-drop-down-wrapper">
+  <span class="navigation-drop-down-btn js-drop-down-btn">Reference</span>
+  <ul class="drop-down-list js-drop-down-list">
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-background-sync-queue.html">sw-background-sync-queue</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-broadcast-cache-update.html">sw-broadcast-cache-update</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-build.html">sw-build</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-cache-expiration.html">sw-cache-expiration</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-cacheable-response.html">sw-cacheable-response</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-lib.html">sw-lib</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-offline-google-analytics.html">sw-offline-google-analytics</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-precaching.html">sw-precaching</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-routing.html">sw-routing</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-runtime-caching.html">sw-runtime-caching</a></li>
+
+
+  
+  </ul>
+</li>
+
+
+
+        
+      </ul>
+    </nav>
+
+    <div class="nav-backdrop js-nav-backdrop"></div>
+
+</section>
+
+
+<header class="primary-header">
+  <div class="primary-header__inner-section">
+    <h1></h1>
+  </div>
+</header>
+
+
+<main>
+  <h1 id="sw-lib">sw-lib</h1>
+
+<p>Use <code class="highlighter-rouge">sw-lib</code> to start your journey toward more complicated Workbox use cases.
+This module is a high-level library that lets you easily configure a service
+worker for precaching assets during install, as well as configure runtime
+caching and routing strategies. Use is easy, requiring only importing into your
+service worker script, and minimal, straight-forward configuration.</p>
+
+<h2 id="install">Install</h2>
+<ol>
+  <li><a href="https://nodejs.org/en/">Install Node.js</a>.</li>
+  <li>
+    <p>Install the module with NPM.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>npm install --save-dev sw-lib
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Copy the following files from
+<code class="highlighter-rouge">./node_modules/sw-lib</code> into your project:</p>
+
+    <ul>
+      <li>sw-lib.js</li>
+      <li>sw-lib.js.map</li>
+      <li>sw-lib.min.js</li>
+      <li>sw-lib.min.js.map</li>
+    </ul>
+
+    <p>You can do this with a simple command like:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>cp node_modules/sw-lib/build/* app/third-party/sw-lib/
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>To then use <code class="highlighter-rouge">sw-lib</code> in your service work import the library in your service worker file.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>importScripts('/third-party/sw-lib/sw-lib.min.js');
+</code></pre>
+    </div>
+
+    <blockquote>
+      <p>Note: If you use a minifier on your service worker script, be aware that
+Workbox requires one that is ES2015-aware. At the time of Workbox’s first
+release (May 2017)
+<a href="https://github.com/babel/babili">Babili</a> is the only minifier that is.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h2 id="precaching">Precaching</h2>
+
+<p>Precaching allows a <a href="https://developers.google.com/web/progressive-web-apps/">Progressive Web App</a> to store an
+<a href="https://developers.google.com/web/fundamentals/architecture/app-shell">AppShell</a>.
+An AppShell is the minimal HTML, CSS and JavaScript required to power the user
+interface and when cached offline can ensure instant, reliable performance
+to users on repeat visits. The sw-lib module implements the precaching needed
+for an app shell with the
+<a href="https://googlechrome.github.io/sw-helpers/reference-docs/stable/latest/module-sw-lib.SWLib.html#precache">goog.swlib.precache(revisionedFiles)</a>
+method. The revisioned files parameter should list all files that your web app
+needs at startup. There are two ways to do this, shown in the examples below.</p>
+
+<blockquote>
+  <p>Note: We recommend that you not create revision numbers
+by hand. Do this automatically using <code class="highlighter-rouge">sw-build</code> or a
+tool like gulp-rev.</p>
+</blockquote>
+
+<p>If you revision your URLs already, normally done to
+cache bust assets, then you can cache them like so:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>goog.swlib.cacheRevisionedAssets([
+    '/styles/main.1234.css',
+    '/images/logo.abcd.jpg'
+]);
+</code></pre>
+</div>
+
+<p>For assets where you can’t revision the URLs or file you
+can pass in an object with a <code class="highlighter-rouge">url</code> and <code class="highlighter-rouge">revision</code>
+parameter:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>goog.swlib.precache([
+    {
+      url: '/index.html',
+      revision: 'b3e78d93b20c49d0c927050682c99df3'
+    },
+    {
+      url: '/about.html',
+      revision: 'd2cb0dda3e8313b990e8dcf5e25d2d0f'
+    }
+]);
+</code></pre>
+</div>
+
+<h2 id="runtime-caching">Runtime caching</h2>
+
+<p>Implementing runtime caching requires matching URLs to
+caching strategies. Specify URLs using express
+style routes, or regex expressions. For the caching
+strategy use a built-in handler or define your own.</p>
+
+<p>To register a caching strategy for a URL, call
+<code class="highlighter-rouge">goog.swlib.router.registerRoute(capture, handler)</code>. This
+method takes two parameters:</p>
+
+<ul>
+  <li><em>capture</em>: Specifies which URLs to match.</li>
+  <li><em>handler</em>: Returns a resource for the URL using a specific caching strategy.</li>
+</ul>
+
+<p>For example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>const stateWhileRevalidate = goog.swlib.staleWhileRevalidate();
+goog.swlib.router.registerRoute('/schedule', staleWhileRevalidate);
+</code></pre>
+</div>
+
+<h2 id="specifying-urls">Specifying URLs</h2>
+
+<h3 id="a-single-endpoint">A single endpoint</h3>
+
+<p>The most straight-forward use of an express route resembles a string literal.
+This is most useful for endpoints that don’t require parameters.</p>
+
+<p>For example, consider a web app for a conference. The
+schedule is likely to have a simple URL that doesn’t
+change. For this URL you might do something like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>const stateWhileRevalidate = goog.swlib.staleWhileRevalidate();
+goog.swlib.router.registerRoute('/schedule', staleWhileRevalidate);
+</code></pre>
+</div>
+
+<h3 id="a-collection-of-similar-urls">A Collection of Similar URLs</h3>
+
+<p>Many apps will need to handle URLS which contain
+parameters. For example, Reddit’s URLs follow the pattern
+<code class="highlighter-rouge">/r/&lt;subreddit name&gt;.json</code>. For example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://www.reddit.com/r/javascript.json
+https://www.reddit.com/r/learnprogramming.json
+</code></pre>
+</div>
+
+<p>Hard-coding every URL could get tedious. Fortunately, these
+URL’s can be captured using regular expressions or
+express-style routes.</p>
+
+<p>For the Reddit example, you would tokenize the part of the
+URL that changes.</p>
+
+<p>Using regular expressions, we could do this like do:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>goog.swlib.router.registerRoute(/https:\/\/www\.reddit\.com\/r\/\w{1,255}\.json/, staleWhileRevalidate);
+</code></pre>
+</div>
+
+<h2 id="implementing-caching-strategies">Implementing caching strategies</h2>
+
+<p>When implementing caching strategies, it’s easy to assume
+that the best approach is to always get the freshest data
+from the network and show the current data while the new
+data is being retrieved. In other words, you’ll be
+attempting to use <a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#stale-while-revalidate">stale while revalidate</a>. But there are other considerations. Network
+constraints and data usage charges may dictate that
+network retrieval be used only for the most critical data.
+Also third-party API’s may have requirements or
+constraints on how often and when they can be called.</p>
+
+<h3 id="built-in-handlers">Built-in handlers</h3>
+
+<p>Built-in handlers make it easy to implement common
+runtime-caching strategies. You can
+find a complete discussion of caching strategies in
+<a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#cache-falling-back-to-network">The Offline Cookbook</a>.</p>
+
+<p>For example, imagine an app for passengers of a cruise
+ship that contains information about ship’s events:
+show times, docking schedules, food service hours, that
+sort of thing. Obviously the passengers want the most
+timely information and this might seem like a good use for
+<a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#stale-while-revalidate">stale while revalidate</a>. But this is a controlled network
+environment and the operators are confident the network
+will respond quickly every time. They might chose to use a
+<a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#network-falling-back-to-cache">network-first</a> strategy:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>const networkFirst = goog.swlib.networkFirst();
+var route = /https:\/\/www\.example.com\/jpmedley\/latest.json/;
+goog.swlib.router.registerRoute(route, networkFirst);
+</code></pre>
+</div>
+
+<p>Or, if they’re feeling bold enough, a <a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#network-only">network-only strategy</a>.</p>
+
+<h2 id="custom-caching-strategies">Custom Caching Strategies</h2>
+
+<p>Using one of the built-in handlers will work for most
+applications. If you need more fine-grained control of
+the response of a URL you’ll need to implement your own caching strategy.</p>
+
+<p>There are two approaches, both shown in examples contained in the api reference. They are <a href="https://googlechrome.github.io/sw-helpers/reference-docs/stable/latest/module-sw-lib.Router.html#examples">implementing your own handler</a> function or <a href="https://googlechrome.github.io/sw-helpers/reference-docs/stable/latest/module-sw-lib.SWLib.html#Route">creating a route instance</a>.</p>
+
+</main>
+
+<footer>
+  <a href="https://GoogleChrome.github.io/workbox" class="footer__btn footer__workbox-btn" role="button" title="Workbox">
+    <img src="/themes/images/workbox-logo-white.min.svg" alt="Workbox Logo" />
+  </a>
+  <div class="footer__right-logos">
+    <div class="footer__logo-row">
+      <a href="https://twitter.com/ChromiumDev" class="footer__btn footer__twitter-btn" role="button" title="Twitter">
+        <img src="/themes/images/twitter-logo.min.svg" alt="Twitter Logo" />
+      </a>
+      <a href="https://github.com/GoogleChrome/sw-helpers" class="footer__btn footer__github-btn" role="button" title="GitHub">
+        <img src="/themes/images/github-logo.min.svg" alt="Github Logo" />
+      </a>
+    </div>
+    <div class="footer__logo-row">
+      <a class="google-dev-logo footer__btn" href="https://developers.google.com/web/">
+        <img src="/themes/images/google-dev-logo.min.svg" alt="Google Developers Logo" />
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+
+  </body>
+
+  
+
+
+
+
+
+
+
+
+<script src="/themes/scripts/detabinator.js" rel="stylesheet" async defer></script>
+<script src="/themes/scripts/nav-drawer.js" rel="stylesheet" async defer></script>
+<script src="/themes/scripts/jsdocs-collapse.js" rel="stylesheet" async defer></script>
+<script src="/themes/scripts/navigation-controller.js" rel="stylesheet" async defer></script>
+<script src="/themes/third_party/anchor-js/anchor.min.js" rel="stylesheet" id="anchorjsscript" async defer></script>
+
+
+</html>
