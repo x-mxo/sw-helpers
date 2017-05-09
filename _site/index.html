@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+  
+
+
+
+
+
+
+
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Welcome to Workbox</title>
+  <meta name="description" content="(Currently Work in Progress) Service Worker helper libraries. ">
+
+  <!-- The docs server over HTTPS, but site.github.url points to HTTP resouce causing mixed content -->
+  <link rel="canonical" href="/">
+  <link rel="alternate" type="application/rss+xml" title="sw-helpers" href="/feed.xml">
+
+  <link rel="shortcut icon" href="/themes/images/favicon.ico">
+
+  <!-- Stylesheet -->
+  <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Open+Sans:300,300i,400,600,700" rel="stylesheet">
+  <link href="/themes/styles/main.css" rel="stylesheet" type="text/css">
+
+  
+</head>
+
+
+  <body>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="navigation-container">
+
+  <!-- Hamburger Menu -->
+  <button class="svg-btn navigation-open-btn js-menu-btn">
+    <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+    </svg>
+  </button>
+
+  <nav class="navigation-links js-nav-drawer">
+      <!-- Logo Header at Top of Nav Drawer -->
+      <section class="nav-drawer-header">
+        <img class="nav-drawer-header__logo" src="/themes/images/workbox-logo-grey-small.min.svg" alt="Small Workbox Logo" />
+
+        <button class="svg-btn navigation-close-btn js-menu-close-btn">
+          <svg height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+          </svg>
+        </button>
+      </section>
+
+      <!-- Actual Links -->
+      <ul>
+        
+          
+<li><a href="/">Getting Started</a></li>
+
+
+        
+          
+<li><a href="/sw-cli">sw-cli</a></li>
+
+
+        
+          
+<li><a href="/sw-build">sw-build</a></li>
+
+
+        
+          
+<li><a href="/sw-lib">sw-lib</a></li>
+
+
+        
+          
+<li class="drop-down-container js-drop-down-wrapper">
+  <span class="navigation-drop-down-btn js-drop-down-btn">Recipes</span>
+  <ul class="drop-down-list js-drop-down-list">
+  
+    
+<li><a href="/recipes/webpack">Web Pack</a></li>
+
+
+  
+    
+<li><a href="/recipes/gulp">Gulp</a></li>
+
+
+  
+    
+<li><a href="/recipes/rollup">Rollup</a></li>
+
+
+  
+    
+<li><a href="/recipes/grunt">Grunt</a></li>
+
+
+  
+  </ul>
+</li>
+
+
+
+        
+          
+<li><a href="/examples">Examples</a></li>
+
+
+        
+          
+<li class="drop-down-container js-drop-down-wrapper">
+  <span class="navigation-drop-down-btn js-drop-down-btn">Reference</span>
+  <ul class="drop-down-list js-drop-down-list">
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-background-sync-queue.html">sw-background-sync-queue</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-broadcast-cache-update.html">sw-broadcast-cache-update</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-build.html">sw-build</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-cache-expiration.html">sw-cache-expiration</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-cacheable-response.html">sw-cacheable-response</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-lib.html">sw-lib</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-offline-google-analytics.html">sw-offline-google-analytics</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-precaching.html">sw-precaching</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-routing.html">sw-routing</a></li>
+
+
+  
+    
+<li><a href="/reference-docs/stable/latest/module-sw-runtime-caching.html">sw-runtime-caching</a></li>
+
+
+  
+  </ul>
+</li>
+
+
+
+        
+      </ul>
+    </nav>
+
+    <div class="nav-backdrop js-nav-backdrop"></div>
+
+</section>
+
+
+<header class="primary-header">
+  <div class="primary-header__inner-section">
+    <h1></h1>
+  </div>
+</header>
+
+
+<main>
+  <h1 id="welcome-to-workbox">Welcome to Workbox</h1>
+
+<p>Workbox is a suite of helper libraries for service workers and progressive web
+apps that lets you implement precaching in a manner of minutes. Its features
+support runtime caching, routing, offline analytics, background syncing, and
+more.</p>
+
+<h2 id="a-service-worker-in-two-minutes">A service worker in two minutes</h2>
+
+<p>Use <a href="sw-cli">sw-cli</a> to add a service worker to an existing project in under two
+minutes.</p>
+
+<h2 id="a-build-script-in-ten-minutes">A build script in ten minutes</h2>
+
+<p>Generate a service worker in your build process
+using <a href="sw-build">sw-build</a>.</p>
+
+<h2 id="much-more">Much more</h2>
+
+<p>Go beyond the basics. If you’d like to use the Workbox libraries, and you
+already have your own service worker, then checkout
+<a href="sw-lib">sw-lib</a> which lets
+you add to what you’ve already got.</p>
+
+<p>If you’ve been using Workbox for a while, or you’re
+ambitious, you can delve into its more advanced features. Browse the
+<a href="recipes">recipes section</a>, try the <a href="examples">examples</a>, or look up
+something in the <a href="reference-docs/stable/latest/">mobules reference</a>.</p>
+
+</main>
+
+<footer>
+  <a href="https://GoogleChrome.github.io/workbox" class="footer__btn footer__workbox-btn" role="button" title="Workbox">
+    <img src="/themes/images/workbox-logo-white.min.svg" alt="Workbox Logo" />
+  </a>
+  <div class="footer__right-logos">
+    <div class="footer__logo-row">
+      <a href="https://twitter.com/ChromiumDev" class="footer__btn footer__twitter-btn" role="button" title="Twitter">
+        <img src="/themes/images/twitter-logo.min.svg" alt="Twitter Logo" />
+      </a>
+      <a href="https://github.com/GoogleChrome/sw-helpers" class="footer__btn footer__github-btn" role="button" title="GitHub">
+        <img src="/themes/images/github-logo.min.svg" alt="Github Logo" />
+      </a>
+    </div>
+    <div class="footer__logo-row">
+      <a class="google-dev-logo footer__btn" href="https://developers.google.com/web/">
+        <img src="/themes/images/google-dev-logo.min.svg" alt="Google Developers Logo" />
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+
+  </body>
+
+  
+
+
+
+
+
+
+
+
+<script src="/themes/scripts/detabinator.js" rel="stylesheet" async defer></script>
+<script src="/themes/scripts/nav-drawer.js" rel="stylesheet" async defer></script>
+<script src="/themes/scripts/jsdocs-collapse.js" rel="stylesheet" async defer></script>
+<script src="/themes/scripts/navigation-controller.js" rel="stylesheet" async defer></script>
+<script src="/themes/third_party/anchor-js/anchor.min.js" rel="stylesheet" id="anchorjsscript" async defer></script>
+
+
+</html>
